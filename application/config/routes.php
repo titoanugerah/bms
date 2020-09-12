@@ -1,0 +1,78 @@
+<?php
+defined('BASEPATH') OR exit('No direct script access allowed');
+
+// link == controller/function
+$route['default_controller'] = 'general/dashboard';
+$route['welcome'] = 'general/welcome';
+$route['logout'] = 'general/logout';
+$route['dashboard'] = 'general/dashboard';
+$route['employee'] = 'master/employee';
+$route['department'] = 'master/department';
+$route['profile'] = 'general/profile';
+$route['item'] = 'master/item';
+$route['model'] = 'master/model';
+$route['asset'] = 'operation/asset';
+$route['assetApproval'] = 'operation/assetApproval';
+$route['myAsset'] = 'operation/myAsset';
+$route['assetRequest'] = 'operation/assetRequest';
+$route['dispossalRequest'] = 'operation/dispossalRequest';
+
+#AJAX
+$route['api/getDepartment'] = 'master/getDepartment';
+$route['api/addDepartment'] = 'master/addDepartment';
+$route['api/deleteDepartment'] = 'master/deleteDepartment';
+$route['api/recoverDepartment'] = 'master/recoverDepartment';
+$route['api/getDetailDepartment'] = 'master/getSelectedDepartment';
+$route['api/getSelectedDepartment'] = 'master/getSelectedDepartment';
+$route['api/updateDepartment'] = 'master/updateDepartment';
+$route['api/getRole'] = 'master/getRole';
+$route['api/getEmployee'] = 'master/getEmployee';
+$route['api/getDetailEmployee'] = 'master/getDetailEmployee';
+$route['api/updateEmployee'] = 'master/updateEmployee';
+$route['api/addEmployee'] = 'master/addEmployee';
+$route['api/recoverEmployee'] = 'master/recoverEmployee';
+$route['api/deleteEmployee'] = 'master/deleteEmployee';
+$route['api/getItem'] = 'master/getItem';
+$route['api/getDetailItem'] = 'master/getDetailItem';
+$route['api/addItem'] = 'master/addItem';
+$route['api/deleteItem'] = 'master/deleteItem';
+$route['api/recoverItem'] = 'master/recoverItem';
+$route['api/updateItem'] = 'master/updateItem';
+$route['api/getModel'] = 'master/getModel';
+$route['api/getDetailModel'] = 'master/getDetailModel';
+$route['api/addModel'] = 'master/addModel';
+$route['api/deleteModel'] = 'master/deleteModel';
+$route['api/recoverModel'] = 'master/recoverModel';
+$route['api/updateModel'] = 'master/updateModel';
+$route['api/getNewModel'] = 'master/getNewModel';
+$route['api/uploadFile/(:any)/(:any)'] = 'master/uploadFile/$1/$2';
+
+$route['api/getAsset'] = 'operation/getAsset';
+$route['api/addAssetRequest'] = 'operation/addAssetRequest';
+$route['api/getDetailAsset'] = 'operation/getDetailAsset';
+$route['api/updateAsset'] = 'operation/updateAsset';
+$route['api/deleteAsset'] = 'operation/deleteAsset';
+$route['api/recoverAsset'] = 'operation/recoverAsset';
+$route['api/getAssetApproval'] = 'operation/getAssetApproval';
+$route['api/approveRequest'] = 'operation/approveRequest';
+$route['api/approveAllRequest'] = 'operation/approveAllRequest';
+$route['api/getApprovedAsset'] = 'operation/getApprovedAsset';
+$route['api/registerAsset'] = 'operation/registerAsset';
+$route['api/getMyAsset'] = 'operation/getMyAsset';
+$route['api/addRequest'] = 'operation/addRequest';
+$route['api/getDetailRequest'] = 'operation/getDetailRequest';
+$route['api/getAssetRequest'] = 'operation/getAssetRequest';
+$route['api/getDetailAssetRequest'] = 'operation/getDetailAssetRequest';
+$route['api/approveAssetRequest'] = 'operation/approveAssetRequest';
+$route['api/rejectAssetRequest'] = 'operation/rejectAssetRequest';
+$route['api/getAvailableAsset'] = 'operation/getAvailableAsset';
+$route['api/getAvailableModel'] = 'operation/getAvailableModel';
+$route['api/selectAssetRequest'] = 'operation/selectAssetRequest';
+$route['api/requestDispossal'] = 'operation/requestDispossal';
+$route['api/getDispossalRequest'] = 'operation/getDispossalRequest';
+$route['api/approveDispossalRequest'] = 'operation/approveDispossalRequest';
+$route['api/rejectDispossalRequest'] = 'operation/rejectDispossalRequest';
+$route['api/addRequestTransferToISP'] = 'operation/addRequestTransferToISP';
+$route['template'] = 'general/template';
+$route['404_override'] = 'general/error';
+$route['translate_uri_dashes'] = FALSE;
