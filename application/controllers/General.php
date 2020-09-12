@@ -10,19 +10,6 @@ class General extends CI_Controller
     $this->load->model('general_model');
   }
 
-  public function index()
-  {
-    if ($this->session->userdata('IsLogin')) {
-    } else {
-      redirect(base_url('welcome'));
-    }
-  }
-
-  public function welcome()
-  {
-    $this->load->view('template', $this->general_model->contentWelcome());
-  }
-
   public function template()
   {
     $this->load->view('template', $this->general_model->contentTemplate());
