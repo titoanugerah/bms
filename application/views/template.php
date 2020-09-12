@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-	<title><?php echo $webConf->Name.' | '.$viewName; ?></title>
+	<title><?php echo 'BMS | '.$viewName; ?></title>
 	<meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
 	<link rel="icon" href="<?php echo base_url('assets/template/AtlantisLite/'); ?>/assets/img/icon.ico" type="image/x-icon"/>
 	<link href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" rel="stylesheet" />
@@ -35,7 +35,7 @@
 			<div class="logo-header" data-background-color="blue">
 
 				<a href="<?php echo base_url(''); ?>" class="logo" style="color:white;">
-					IT Asset Information
+					Backup Monitoring 
 				</a>
 				<button class="navbar-toggler sidenav-toggler ml-auto" type="button" data-toggle="collapse" data-target="collapse" aria-expanded="false" aria-label="Toggle navigation">
 					<span class="navbar-toggler-icon">

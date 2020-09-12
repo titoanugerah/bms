@@ -13,7 +13,7 @@ class General_model extends CI_Model
 
   public function contentWelcome()
   {
-    $data['webConf'] = $this->core_model->getSingleData('webConf', 'id', 1);
+//    $data['webConf'] = $this->core_model->getSingleData('webConf', 'id', 1);
     $data['viewName'] = 'welcome';
     $this->account();
     return $data;
@@ -21,14 +21,14 @@ class General_model extends CI_Model
 
   public function contentTemplate()
   {
-    $data['webConf'] = $this->core_model->getSingleData('webConf', 'id', 1);
+//    $data['webConf'] = $this->core_model->getSingleData('webConf', 'id', 1);
     $data['viewName'] = 'blank';
     return $data;
   }
 
   public function contentDashboard()
   {
-    $data['webConf'] = $this->core_model->getSingleData('webConf', 'id', 1);
+#    $data['webConf'] = $this->core_model->getSingleData('webConf', 'id', 1);
     $data['viewName'] = 'dashboard';
     $this->account();
     return $data;
