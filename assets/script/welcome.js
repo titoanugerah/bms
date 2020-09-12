@@ -1,5 +1,5 @@
 $(document).ready(function(){
-  if ($("#IsLogin").val()!="true") {
+  if ($("#isLogin").val()!="true") {
     $(".icon-menu").click();
     $("#keyword").attr('placeholder', 'Fitur tidak tersedia');
   }

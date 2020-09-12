@@ -13,7 +13,6 @@ class General_model extends CI_Model
 
   public function contentWelcome()
   {
-//    $data['webConf'] = $this->core_model->getSingleData('webConf', 'id', 1);
     $data['viewName'] = 'welcome';
     $this->account();
     return $data;
@@ -21,14 +20,12 @@ class General_model extends CI_Model
 
   public function contentTemplate()
   {
-//    $data['webConf'] = $this->core_model->getSingleData('webConf', 'id', 1);
     $data['viewName'] = 'blank';
     return $data;
   }
 
   public function contentDashboard()
   {
-#    $data['webConf'] = $this->core_model->getSingleData('webConf', 'id', 1);
     $data['viewName'] = 'dashboard';
     $this->account();
     return $data;
@@ -43,48 +40,49 @@ class General_model extends CI_Model
     $client->addScope("email");
     $client->addScope("profile");
 
-    if (!$this->session->userdata('IsLogin'))
+    if (!$this->session->userdata('isLogin'))
     {
       if (isset($_GET['code']))
       {
         $token = $client->fetchAccessTokenWithAuthCode($this->input->get('code'));
         $client->setAccessToken($token['access_token']);
         $validUser = (new Google_Service_Oauth2($client))->userinfo->get();
-        $isRegisteredUser = $this->core_model->getNumRows('User', 'Email', $validUser->email);
+        $isRegisteredUser = $this->core_model->getNumRows('user', 'email', $validUser->email);
         if ($isRegisteredUser)
         {
           $data = array(
-            'Fullname' =>  $validUser->name,
-            'Image' => $validUser->picture,
+            'name' =>  $validUser->name,
+            'image' => $validUser->picture,
           );
-          $this->core_model->updateSomeData('User', 'Email', $validUser->email, $data);
-          $user = $this->core_model->getSingleData('ViewMember', 'Email', $validUser->email);
-          if ($user->IsExist)
+          $this->core_model->updateSomeData('user', 'email', $validUser->email, $data);
+          $user = $this->core_model->getSingleData('viewUser', 'email', $validUser->email);
+          if ($user->isExist)
           {
             $userdata = array(
-              'IsLogin' => true,
-              'Id' => $user->Id,
-              'Email' => $user->Email,
-              'Fullname' => $user->Fullname,
-              'Ext' => $user->Ext,
-              'Image' => $user->Image,
-              'RoleId' => $user->RoleId,
-              'Role' => $user->Role,
-              'DepartmentId' => $user->DepartmentId,
-              'Department' => $user->Department,
-              'IsExist' => $user->IsExist
+              'isLogin' => true,
+              'id' => $user->id,
+              'email' => $user->email,
+              'name' => $user->name,
+              'image' => $user->image,
+              'roleId' => $user->roleId,
+              'role' => $user->role,
+              'teamId' => $user->teamId,
+              'spvId' => $user->spvId,              
+              'supervisor' => $user->supervisor,
+              'adminId' => $user->adminId,
+              'isExist' => $user->isExist
             );
             $this->session->set_userdata($userdata);
-            notify('Berhasil', 'Login berhasil, Selamat datang '.$this->session->userdata['Fullname'], 'success', 'fa fa-user','');
+            notify('Berhasil', 'Login berhasil, Selamat datang '.$this->session->userdata['name'], 'success', 'fa fa-user','');
           }
           else
           {
-            notify('Gagal', 'Akun anda sudah tidak aktif, silahkan hubungi Admin Department', 'danger', 'fa fa-user', '');
+            notify('Gagal', 'Akun anda sudah tidak aktif, silahkan hubungi Admin', 'danger', 'fa fa-user', '');
           }
         }
         else
         {
-          notify('Gagal', 'Akun anda tidak terdaftar di sistem kami, silahkan hubungi Admin Department', 'danger', 'fa fa-user', '');
+          notify('Gagal', 'Akun anda tidak terdaftar di sistem kami, silahkan hubungi Admin', 'danger', 'fa fa-user', '');
         }
       }
       else

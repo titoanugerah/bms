@@ -3,6 +3,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 // link == controller/function
 $route['default_controller'] = 'general/dashboard';
+$route['dashboard'] = 'general/dashboard';
+$route['logout'] = 'general/logout';
 
 #AJAX
 $route['api/getDepartment'] = 'master/getDepartment';
