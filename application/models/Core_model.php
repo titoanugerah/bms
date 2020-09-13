@@ -48,6 +48,34 @@ class Core_model extends CI_Model
     return $data->result();
   }
 
+  public function recoverData($table, $whereVar, $whereVal)
+  {
+    $result['isSuccess'] = false;
+    $where = array($whereVar => $whereVal );
+    $data = array('isExist' => 1 );
+    $this->db->where($where);
+    $result['isSuccess'] = $this->db->update($table, $data);
+    $result['content'] = "Data berhasil dipulihkan";
+    return $result;
+  }
+
+  public function updateDataBatch($table, $whereVar, $whereVal, $data)
+  {
+    $result['isSuccess'] = false;
+    $where = array($whereVar => $whereVal );
+    $this->db->where($where);
+    $result['isSuccess'] = $this->db->update($table, $data);
+    $result['content'] = "Data berhasil dipulihkan";
+    return $result;
+  }
+
+  public function createData($table, $data)
+  {
+    $result['isSuccess'] = $this->db->insert($table, $data);
+    $result['content'] = "Data berhasil ditambahkan";
+    return $result;
+  }
+
   public function getNumRows($table, $whereVar, $whereVal )
   {
     // $list = $this->db->list_fields($table);
@@ -93,8 +121,13 @@ class Core_model extends CI_Model
 
   public function deleteData($table, $whereVar, $whereVal)
   {
+    $data['isSuccess'] = false;
     $where = array($whereVar => $whereVal );
-    return $this->db->delete($table, $where);
+    $data = array('isExist' => 0 );
+    $this->db->where($where);
+    $result['isSuccess'] = $this->db->update($table, $data);
+    $result['content'] = "Data berhasil dihapus";
+    return $result;
   }
 
 

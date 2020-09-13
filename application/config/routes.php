@@ -7,13 +7,16 @@ $route['dashboard'] = 'general/dashboard';
 $route['profile'] = 'general/profile';
 $route['logout'] = 'general/logout';
 
+$route['role'] = 'role';
+
+
 #AJAX
-$route['api/getDepartment'] = 'master/getDepartment';
-$route['api/addDepartment'] = 'master/addDepartment';
-$route['api/deleteDepartment'] = 'master/deleteDepartment';
-$route['api/recoverDepartment'] = 'master/recoverDepartment';
-$route['api/getDetailDepartment'] = 'master/getSelectedDepartment';
-$route['api/getSelectedDepartment'] = 'master/getSelectedDepartment';
+$route['api/role/read'] = 'role/read';
+$route['api/role/readDetail'] = 'role/readDetail';
+$route['api/role/recover'] = 'role/recover';
+$route['api/role/create'] = 'role/create';
+$route['api/role/delete'] = 'role/delete';
+$route['api/role/update'] = 'role/update';
 
 
 #Others
