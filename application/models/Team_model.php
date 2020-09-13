@@ -11,7 +11,7 @@ class Team_model extends CI_Model
 
   public function contentTeam()
   {
-    if ($this->session->teamdata['roleId'] == 1)
+    if ($this->session->userdata['roleId'] == 1)
     {
       $data['viewName'] = 'master/team';
       return $data;
@@ -24,7 +24,7 @@ class Team_model extends CI_Model
 
   public function create()
   {
-    if ($this->session->teamdata('role')=="admin") {
+    if ($this->session->userdata('role')=="admin") {
       return json_encode($this->core_model->createData('team',  $this->input->post()));
     }
     
@@ -38,27 +38,33 @@ class Team_model extends CI_Model
   public function readDetail()
   {
     $data['detail'] = $this->core_model->readSingleData('viewTeam', 'id', $this->input->post('id'));
+    $data['member'] = $this->core_model->readSomeData('viewUser', 'teamId', $this->input->post('id'));
     return json_encode($data);
   }
 
   public function update()
   {
-    if ($this->session->teamdata('role')=="admin") {
-      return json_encode($this->core_model->updateDataBatch('team',  'id', $this->input->post('id'), $this->input->post()));
-    }
-    
+    if ($this->session->userdata('role')=="admin") {
+      $input = $this->input->post();
+      $oldSpv = $this->core_model->readSingleData('team', 'id', $input['id']);
+      $this->core_model->updateData('team', 'id', $input['id'], 'spvId', $input['spvId'] );
+      $this->core_model->updateData('user', 'id', $oldSpv->id, 'roleId', 4 );
+      $this->core_model->updateData('user', 'id', $input['id'], 'roleId', 2 );
+      $result['content'] = "Data berhasil dirubah";
+      return json_encode($result);
+    }    
   }
 
   public function recover()
   {
-    if ($this->session->teamdata('role')=="admin") {
+    if ($this->session->userdata('role')=="admin") {
       return json_encode($this->core_model->recoverData('team', 'id', $this->input->post('id')));
     }
   }
 
   public function delete()
   {
-    if ($this->session->teamdata('role')=="admin") {
+    if ($this->session->userdata('role')=="admin") {
       return json_encode($this->core_model->deleteData('team', 'id', $this->input->post('id')));
     }
     
