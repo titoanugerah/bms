@@ -55,7 +55,7 @@ class General_model extends CI_Model
             'image' => $validUser->picture,
           );
           $this->core_model->updateSomeData('user', 'email', $validUser->email, $data);
-          $user = $this->core_model->getSingleData('viewUser', 'email', $validUser->email);
+          $user = $this->core_model->readSingleData('viewUser', 'email', $validUser->email);
           if ($user->isExist)
           {
             $userdata = array(

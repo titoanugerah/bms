@@ -12,13 +12,13 @@ class Core_model extends CI_Model
     parent::__construct();
   }
 
-  public function getSingleData($table, $whereVar, $whereVal )
+  public function readSingleData($table, $whereVar, $whereVal )
   {
     $data = $this->db->get_where($table, $where = array($whereVar => $whereVal ));
     return $data->row();
   }
 
-  public function getSomeData($table, $whereVar, $whereVal )
+  public function readSomeData($table, $whereVar, $whereVal )
   {
     $list = $this->db->list_fields($table);
     $keyword = $this->input->post('keyword');
@@ -37,7 +37,7 @@ class Core_model extends CI_Model
     return $data->result();
   }
 
-  public function getAllData($table)
+  public function readAllData($table)
   {
     $list = $this->db->list_fields($table);
     foreach ($list as $item)

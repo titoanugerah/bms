@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Role_model extends CI_Model
+class User_model extends CI_Model
 {
 
   function __construct()
@@ -9,11 +9,11 @@ class Role_model extends CI_Model
     parent::__construct();
   }
 
-  public function contentRole()
+  public function contentUser()
   {
     if ($this->session->userdata['roleId'] == 1)
     {
-      $data['viewName'] = 'master/role';
+      $data['viewName'] = 'master/user';
       return $data;
     }
     else
@@ -25,26 +25,28 @@ class Role_model extends CI_Model
   public function create()
   {
     if ($this->session->userdata('role')=="admin") {
-      return json_encode($this->core_model->createData('role',  $this->input->post()));
+      $data = $this->input->post();
+      $data['adminId'] = $this->session->userdata('id');
+      return json_encode($this->core_model->createData('user', $data));
     }
     
   }
   public function read()
   {
-    $data['role'] = $this->core_model->readAllData('role');
+    $data['user'] = $this->core_model->readAllData('viewUser');
     return json_encode($data);
   }
 
   public function readDetail()
   {
-    $data['detail'] = $this->core_model->readSingleData('role', 'id', $this->input->post('id'));
+    $data['detail'] = $this->core_model->readSingleData('viewUser', 'id', $this->input->post('id'));
     return json_encode($data);
   }
 
   public function update()
   {
     if ($this->session->userdata('role')=="admin") {
-      return json_encode($this->core_model->updateDataBatch('role',  'id', $this->input->post('id'), $this->input->post()));
+      return json_encode($this->core_model->updateDataBatch('user',  'id', $this->input->post('id'), $this->input->post()));
     }
     
   }
@@ -52,14 +54,14 @@ class Role_model extends CI_Model
   public function recover()
   {
     if ($this->session->userdata('role')=="admin") {
-      return json_encode($this->core_model->recoverData('role', 'id', $this->input->post('id')));
+      return json_encode($this->core_model->recoverData('user', 'id', $this->input->post('id')));
     }
   }
 
   public function delete()
   {
     if ($this->session->userdata('role')=="admin") {
-      return json_encode($this->core_model->deleteData('role', 'id', $this->input->post('id')));
+      return json_encode($this->core_model->deleteData('user', 'id', $this->input->post('id')));
     }
     
   }
