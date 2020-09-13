@@ -98,8 +98,6 @@ class General_model extends CI_Model
 
   public function contentProfile()
   {
-    //webconf = ambil setingan  website
-    $data['webConf'] = $this->core_model->getSingleData('webConf', 'id', 1);
     $data['viewName'] = 'profile';
     return $data;
   }

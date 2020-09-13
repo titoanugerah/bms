@@ -23,27 +23,21 @@
           </div>
           <div class="card-body">
             <div class="row">
-              <div class="form-group col-md-6">
+              <div class="form-group col-md-4">
                 <label>Nama Pengguna</label>
-                <input type="text" class="form-control" id="Id" value="<?php echo $this->session->userdata['Fullname'] ?>">
+                <input type="text" class="form-control" id="id" value="<?php echo $this->session->userdata['name'] ?>">
               </div>
-              <div class="form-group col-md-6">
+              <div class="form-group col-md-4">
                 <label>Email</label>
-                <input type="email" class="form-control" id="Email" value="<?php echo $this->session->userdata['Email'] ?>">
+                <input type="email" class="form-control" id="email" value="<?php echo $this->session->userdata['email'] ?>">
               </div>
               <div class="form-group col-md-4">
                 <label>Posisi</label>
-                <input type="text" class="form-control" id="Role" value="<?php echo $this->session->userdata['Role'] ?>">
-              </div>
-              <div class="form-group col-md-4">
-                <label>Departemen</label>
-                <input type="text" class="form-control" id="Department" value="<?php echo $this->session->userdata['Department'] ?>">
-              </div>
-              <div class="form-group col-md-4">
-                <label>Ext</label>
-                <input type="text" class="form-control" id="Ext" value="<?php echo $this->session->userdata['Ext'] ?>">
+                <input type="text" class="form-control" id="role" value="<?php echo $this->session->userdata['role'] ?>">
               </div>
             </div>
+            <br>
+
           </div>
         </div>
       </div>
@@ -57,12 +51,11 @@
         <div class="card-body">
           <center>
             <div class="avatar avatar-xxl">
-              <img src="<?php echo $this->session->userdata['Image']; ?>" alt="..." class="avatar-img rounded-circle">
+              <img src="<?php echo $this->session->userdata['image']; ?>" alt="..." class="avatar-img rounded-circle">
               <br><br>
-              <h4><?php echo $this->session->userdata['Fullname']; ?></h4>
-              <p><?php echo $this->session->userdata['Department']; ?></p>
             </div>
-          </center></div>
+          </center>
+          </div>
         </div>
       </div>
     </div>

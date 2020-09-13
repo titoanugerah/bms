@@ -10,11 +10,6 @@ class General extends CI_Controller
     $this->load->model('general_model');
   }
 
-  public function template()
-  {
-    $this->load->view('template', $this->general_model->contentTemplate());
-  }
-
   public function dashboard()
   {
     $this->load->view('template', $this->general_model->contentDashboard());
@@ -30,6 +25,12 @@ class General extends CI_Controller
   {
     $this->load->view('template', $this->general_model->contentProfile());
   }
+
+  public function template()
+  {
+    $this->load->view('template', $this->general_model->contentTemplate());
+  }
+
 
   public function error()
   {
