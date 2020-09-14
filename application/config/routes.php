@@ -46,6 +46,16 @@ $route['api/category/delete'] = 'category/delete';
 $route['api/category/update'] = 'category/update';
 
 
+#Cartridge
+$route['cartridge'] = 'cartridge';
+$route['api/cartridge/read'] = 'cartridge/read';
+$route['api/cartridge/readDetail'] = 'cartridge/readDetail';
+$route['api/cartridge/recover'] = 'cartridge/recover';
+$route['api/cartridge/create'] = 'cartridge/create';
+$route['api/cartridge/delete'] = 'cartridge/delete';
+$route['api/cartridge/update'] = 'cartridge/update';
+
+
 #Others
 $route['template'] = 'general/template';
 $route['404_override'] = 'general/error';

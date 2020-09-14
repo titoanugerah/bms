@@ -65,7 +65,7 @@ class Core_model extends CI_Model
     $where = array($whereVar => $whereVal );
     $this->db->where($where);
     $result['isSuccess'] = $this->db->update($table, $data);
-    $result['content'] = "Data berhasil dipulihkan";
+    $result['content'] = "Data berhasil dirubah";
     return $result;
   }
 
@@ -108,7 +108,8 @@ class Core_model extends CI_Model
     $data = array($setVar => $setVal );
     $this->db->where($where);
     $this->db->update($table, $data);
-
+    $result['content'] = "Data berhasil dirubah";
+    return $result;
   }
 
   public function updateSomeData($table, $whereVar, $whereVal, $setArray)
