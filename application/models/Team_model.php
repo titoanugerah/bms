@@ -25,7 +25,12 @@ class Team_model extends CI_Model
   public function create()
   {
     if ($this->session->userdata('role')=="admin") {
-      return json_encode($this->core_model->createData('team',  $this->input->post()));
+      $input = $this->input->post();
+      $input['adminId'] = $this->session->userdata('id');
+      $result = $this->core_model->createData('team',  $input);
+      $this->core_model->updateData('user', 'id', $input['spvId'], 'teamId', $this->db->insert_id());
+      return json_encode($result);
+      // return json_encode($this->input->post());
     }
     
   }

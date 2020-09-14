@@ -178,11 +178,11 @@ $(document).ready(function(){
       type: "POST",
       dataType : "JSON",
       data : {
-         email : $("#addEmail").val(),
-         roleId : $("#addRoleId").val()
+         spvId : $("#addSpvId").val()
       },
       url: "api/team/create",
       success: function(result) {
+        console.log(result);
         $("#addTeamModal").modal('hide');
         notify('fas fa-check', 'Berhasil', result.content, 'success');
         getTeam();

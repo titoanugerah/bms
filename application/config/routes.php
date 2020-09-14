@@ -36,6 +36,14 @@ $route['api/team/create'] = 'team/create';
 $route['api/team/delete'] = 'team/delete';
 $route['api/team/update'] = 'team/update';
 
+#Category
+$route['category'] = 'category';
+$route['api/category/read'] = 'category/read';
+$route['api/category/readDetail'] = 'category/readDetail';
+$route['api/category/recover'] = 'category/recover';
+$route['api/category/create'] = 'category/create';
+$route['api/category/delete'] = 'category/delete';
+$route['api/category/update'] = 'category/update';
 
 
 #Others
