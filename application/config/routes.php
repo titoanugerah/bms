@@ -64,6 +64,15 @@ $route['api/job/create'] = 'job/create';
 $route['api/job/delete'] = 'job/delete';
 $route['api/job/update'] = 'job/update';
 
+#Dataset
+$route['dataset'] = 'dataset';
+$route['api/dataset/read'] = 'dataset/read';
+$route['api/dataset/readDetail'] = 'dataset/readDetail';
+$route['api/dataset/recover'] = 'dataset/recover';
+$route['api/dataset/create'] = 'dataset/create';
+$route['api/dataset/delete'] = 'dataset/delete';
+$route['api/dataset/update'] = 'dataset/update';
+
 #Others
 $route['template'] = 'general/template';
 $route['404_override'] = 'general/error';
