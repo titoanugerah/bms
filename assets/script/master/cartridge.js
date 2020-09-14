@@ -10,6 +10,7 @@ $(document).ready(function(){
 
 function detailCartridgeForm(id) {
   $("#detailCartridgeModal").modal('show');
+  getJob();
   $.ajax({
     type: "POST",
     dataType : "JSON",
@@ -20,6 +21,7 @@ function detailCartridgeForm(id) {
     success: function(result) {
       $('#editId').val(result.detail.id);
       $('#editName').val(result.detail.name);
+      $("#editJobId").val(result.detail.jobId).change();
     },
     error: function(result) {
       console.log(result);
@@ -41,6 +43,7 @@ function updateCartridge(){
     data : {
        id : $("#editId").val(),
        name : $("#editName").val(),
+       jobId : $("#editJobId").val()
     },
     url: "api/cartridge/update",
     success: function(result) {
@@ -57,6 +60,7 @@ function updateCartridge(){
 function addNewCartridgeForm() {
   $('#keyword').val("");
   getCartridge();
+  getJob();
   $("#addCartridgeModal").modal('show');
 }
 
@@ -66,6 +70,7 @@ function addCartridge() {
     dataType : "JSON",
     data : {
        name : $("#addName").val(),
+       jobId : $("#addJobId").val()
     },
     url: "api/cartridge/create",
     success: function(result) {
@@ -134,7 +139,7 @@ function  getCartridge(){
                     '</div>' +
                     '<div class="col-7 col-stats">' +
                       '<div class="numbers">' +
-                        '<p class="card-cartridge">Cartridge</p>' +
+                        '<p class="card-cartridge">'+cartridge.job+'</p>' +
                         '<h4 class="card-title">' + uppercase(cartridge.name) +'</h4>' +
                       '</div>' +
                     '</div>' +
@@ -206,6 +211,34 @@ function recoverCartridge() {
   } else {
     notify('fas fa-bell', 'Gagal', 'Mohon pilih dengan benar', 'danger');
   }
+}
+
+function  getJob(){
+  $.ajax({
+    type: "POST",
+    dataType : "JSON",
+    data : {
+       keyword : $("#keyword").val(),
+    },
+    url: "api/job/read",
+    success: function(result) {
+     var html1 = '<option value="0"> Silahkan pilih </option>';
+      result.job.forEach(job => {
+        if(job.isExist == 1){
+          html1 = html1 +
+           '<option value="'+job.id+'"> '+uppercase(job.name)+' </option>';
+        }
+      });
+
+      $('#addJobId').html(html1);
+      $('#editJobId').html(html1);
+    },
+    error: function(result) {
+      console.log(result);
+      notify('fas fa-times', 'Gagal', getErrorMsg(result.responseText), 'danger');
+    }
+  });
+
 }
 
 function unauthorized() {

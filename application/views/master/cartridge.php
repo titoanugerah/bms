@@ -40,13 +40,22 @@
           <div class="tab-pane active" id="addNewTab">
 
             <div class="row">
-              <div class="col-md-12">
+              <div class="col-md-6">
                 <div class="form-group">
                   <label>Nama Cartridge / Volser</label>
                   <input type="text" class="form-control" id="addName" required>
                 </div>
               </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Job/Aplikasi</label>
+                  <br>
+                  <select class="form-control select2addmodal" id="addJobId" style="width:200px">
+                  </select>
+                </div>
+              </div>
             </div>
+            
             <div class="modal-footer">
               <button type="button" class="btn btn-primary" onclick="addCartridge()">Simpan</button>
               <button type="button" data-dismiss="modal" class="btn btn-secondary">Kembali</button>
@@ -84,11 +93,19 @@
       </div>
       <div class="modal-body">        
         <div class="row">
-          <div class="col-md-12">
+          <div class="col-md-6">
             <div class="form-group">
               <label>Nama Cartridge / Volser</label>
               <input type="text" class="form-control" id="editName" required>
               <input type="text" class="form-control" id="editId" hidden>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>Job/Aplikasi</label>
+              <br>
+              <select class="form-control select2modal" id="editJobId" style="width:200px">
+              </select>
             </div>
           </div>
         </div>

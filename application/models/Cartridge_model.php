@@ -25,19 +25,22 @@ class Cartridge_model extends CI_Model
   public function create()
   {
     if ($this->session->userdata('role')=="admin") {
-      return json_encode($this->core_model->createData('cartridge',  $this->input->post()));
+      $input = $this->input->post();
+      $input['adminId'] = $this->session->userdata('id');
+      $result = $this->core_model->createData('cartridge',  $input);
+      return json_encode($result);
     }
     
   }
   public function read()
   {
-    $data['cartridge'] = $this->core_model->readAllData('cartridge');
+    $data['cartridge'] = $this->core_model->readAllData('viewCartridge');
     return json_encode($data);
   }
 
   public function readDetail()
   {
-    $data['detail'] = $this->core_model->readSingleData('cartridge', 'id', $this->input->post('id'));
+    $data['detail'] = $this->core_model->readSingleData('viewCartridge', 'id', $this->input->post('id'));
     return json_encode($data);
   }
 

@@ -101,7 +101,7 @@
           </div>
           <div class="col-md-6">
             <div class="form-group">
-              <label>Kategori Backup</label>
+              <label>Job/Aplikasi</label>
               <br>
               <select class="form-control select2modal" id="editJobId" style="width:200px">
               </select>
