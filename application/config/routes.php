@@ -55,6 +55,14 @@ $route['api/cartridge/create'] = 'cartridge/create';
 $route['api/cartridge/delete'] = 'cartridge/delete';
 $route['api/cartridge/update'] = 'cartridge/update';
 
+#Job
+$route['job'] = 'job';
+$route['api/job/read'] = 'job/read';
+$route['api/job/readDetail'] = 'job/readDetail';
+$route['api/job/recover'] = 'job/recover';
+$route['api/job/create'] = 'job/create';
+$route['api/job/delete'] = 'job/delete';
+$route['api/job/update'] = 'job/update';
 
 #Others
 $route['template'] = 'general/template';
