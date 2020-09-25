@@ -120,8 +120,8 @@
         <button type="button" class="close" data-dismiss="modal">&times;</button>
       </div>
       <div class="modal-body">                
-        <input type="date" id="dateHistory">
-        <input type="text" id="jobIdHistory">
+        <input type="date" id="dateHistory" hidden>
+        <input type="text" id="jobIdHistory" hidden>
         <table  class="display datatable">
           <thead>
             <tr>

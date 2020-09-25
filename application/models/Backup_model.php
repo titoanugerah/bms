@@ -95,6 +95,93 @@ class Backup_model extends CI_Model
     
   }
 
+  public function download($id,$date)
+  {
+    //CREATE NEW EXCEL OBJECT
+    $this->load->library('Excel');
+    $objPHPExcel = new PHPExcel();
+
+    //INFO AND DETAILS
+    $objPHPExcel->getProperties()
+    ->setCreator("Risman Maulidi Ahmad")
+    ->setLastModifiedBy("Risman Maulidi Ahmad")
+    ->setTitle("BMS Reporting")
+    ->setSubject('Backup Monitoring System')
+    ->setDescription("Backup Monitoring System")
+    ->setKeywords("BMS")
+    ->setCategory("private");
+
+    $objPHPExcel->setActiveSheetIndex(0)
+    ->setCellValue('A1', 'No')
+    ->setCellValue('B1', 'Job' )
+    ->setCellValue('C1', 'Cartridge' )
+    ->setCellValue('D1', 'Remark' )
+    ->setCellValue('E1', 'Dataset' )
+    ->setCellValue('F1', 'Tanggal')
+    ->setCellValue('G1', 'Record')
+    ->setCellValue('H1', 'Operator')
+    ;
+
+    $row = 2;  $i=1; $job; $currentJob=""; $currentCartridge="";
+    // $query = 'select * from view_request where date="'.$date.'" and location_id = '.$location_id;
+    // $requests = ($this->db->query($query))->result();
+
+    //GET DATA
+    $query = 'select * from viewBackup where date(date) = "'.$date.'" and jobId = '.$id;
+    $histories = ($this->db->query($query))->result();
+    
+    foreach ($histories as $history) : 
+
+      if($history->job != $currentJob){
+        $objPHPExcel->setActiveSheetIndex(0)
+        ->setCellValue('B'.$row, $history->job);  
+        $currentJob = $history->job;
+      } else {
+        $lastRow = $row-1;
+        $objPHPExcel->getActiveSheet()->mergeCells('B2:B4');
+      }
+
+
+
+      //SET VALUE
+      $objPHPExcel->setActiveSheetIndex(0)
+      ->setCellValue('A'.$row, $i)
+      ->setCellValue('B'.$row, $history->job)
+      ->setCellValue('C'.$row, $history->cartridge)
+      // ->setCellValue('D'.$row, $destination)
+      ->setCellValue('E'.$row, $history->dataset)
+      ->setCellValue('F'.$row, $history->date)
+      ->setCellValue('G'.$row, $history->remark)
+      ->setCellValue('H'.$row, $history->user);
+
+
+      $row++;
+      $i++;
+      $job=$history->job;
+    endforeach;
+    $objPHPExcel->getActiveSheet()->setTitle('Backup History');
+    //FORMATING
+    foreach($range = array('A','B','C','E','F','G','H') as $columnID) {
+      $objPHPExcel->getActiveSheet()->getColumnDimension($columnID)
+          ->setAutoSize(true);
+    }
+
+
+    $filename = "BMS_".$job;
+    header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+    header("Content-Disposition: attachment; filename=".$filename.".xls");
+    header('Cache-Control: max-age=0');
+    header ('Expires: Mon, 20 Dec 2020 05:00:00 GMT'); // Date in the past
+    header ('Last-Modified: '.gmdate('D, d M Y H:i:s').' GMT'); // always modified
+    header ('Cache-Control: no-cache, must-revalidate'); // HTTP/1.1
+    header ('Pragma: public'); // HTTP/1.0
+
+    $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel5');
+    $objWriter->save('php://output');
+    return true;
+
+  }
+
 
 
 

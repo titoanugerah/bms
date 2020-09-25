@@ -54,7 +54,7 @@ class Backup extends CI_Controller
 
   public function download($id, $date)
   {
-    
+    $this->backup_model->download($id,$date);  
   }
 
 }
