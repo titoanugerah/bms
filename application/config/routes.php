@@ -73,6 +73,17 @@ $route['api/dataset/create'] = 'dataset/create';
 $route['api/dataset/delete'] = 'dataset/delete';
 $route['api/dataset/update'] = 'dataset/update';
 
+#Backup
+$route['backup'] = 'backup';
+$route['api/backup/read'] = 'backup/read';
+$route['api/backup/readDetail'] = 'backup/readDetail';
+$route['api/backup/recover'] = 'backup/recover';
+$route['api/backup/create'] = 'backup/create';
+$route['api/backup/delete'] = 'backup/delete';
+$route['api/backup/update'] = 'backup/update';
+$route['api/backup/readHistoryDetail'] = 'backup/readHistoryDetail';
+$route['api/backup/download/(:any)/(:any)'] = 'backup/download/$1/$2';
+
 #Others
 $route['template'] = 'general/template';
 $route['404_override'] = 'general/error';

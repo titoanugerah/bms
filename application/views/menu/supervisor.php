@@ -5,24 +5,16 @@
   </a>
 </li>
 
-
 <li class="nav-item active" >
-  <a href="<?php echo base_url('job'); ?>">
+  <a href="<?php echo base_url('backup'); ?>">
     <i class="fas fa-wrench"></i>
-    <p>Job/Aplikasi</p>
+    <p>Backup Aplikasi/Job</p>
   </a>
 </li>
 
 <li class="nav-item active" >
-  <a href="<?php echo base_url('cartridge'); ?>">
-    <i class="fas fa-hdd"></i>
-    <p>Cartridge/Volser</p>
-  </a>
-</li>
-
-<li class="nav-item active" >
-  <a href="<?php echo base_url('dataset'); ?>">
+  <a href="<?php echo base_url('issue'); ?>">
     <i class="fas fa-sticky-note"></i>
-    <p>Data Set</p>
+    <p>Laporan Masalah</p>
   </a>
-</li>
+</li> 

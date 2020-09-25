@@ -25,7 +25,8 @@ class Core_model extends CI_Model
     $likeQuery = "";
     foreach ($list as $item)
     {
-      if ($item=='Id') {
+      if ($item=='id') {
+        
       } else {
         #$this->db->or_like($item, $this->input->post('keyword'));
         $likeQuery = $likeQuery .' '.$item.' LIKE "%'.$keyword.'%" or ';
