@@ -12,7 +12,8 @@ class Backup extends CI_Controller
   }
 
   public function index(){
-    $this->load->view('template', $this->backup_model->contentBackup());
+    echo "test";
+    //    $this->load->view('template', $this->backup_model->contentBackup());
   }
 
 
