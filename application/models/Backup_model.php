@@ -131,28 +131,33 @@ class Backup_model extends CI_Model
     $histories = ($this->db->query($query))->result();
     
     foreach ($histories as $history) : 
+      $lastRow = $row-1;
+
+
+      //SET VALUE
+      $objPHPExcel->setActiveSheetIndex(0)
+      ->setCellValue('A'.$row, $i)
+      ->setCellValue('E'.$row, $history->dataset)
+      ->setCellValue('F'.$row, $history->date)
+      ->setCellValue('G'.$row, $history->remark)
+      ->setCellValue('H'.$row, $history->user);
+
 
       if($history->job != $currentJob){
         $objPHPExcel->setActiveSheetIndex(0)
         ->setCellValue('B'.$row, $history->job);  
         $currentJob = $history->job;
       } else {
-        $lastRow = $row-1;
-        $objPHPExcel->getActiveSheet()->mergeCells('B2:B4');
+        $objPHPExcel->getActiveSheet()->mergeCells('B'.$lastRow.':B'.$row);
       }
 
-
-
-      //SET VALUE
-      $objPHPExcel->setActiveSheetIndex(0)
-      ->setCellValue('A'.$row, $i)
-      ->setCellValue('B'.$row, $history->job)
-      ->setCellValue('C'.$row, $history->cartridge)
-      // ->setCellValue('D'.$row, $destination)
-      ->setCellValue('E'.$row, $history->dataset)
-      ->setCellValue('F'.$row, $history->date)
-      ->setCellValue('G'.$row, $history->remark)
-      ->setCellValue('H'.$row, $history->user);
+      if($history->cartridge != $currentCartridge){
+        $objPHPExcel->setActiveSheetIndex(0)
+        ->setCellValue('C'.$row, $history->cartridge);  
+        $currentCartridge = $history->cartridge;
+      } else {
+        $objPHPExcel->getActiveSheet()->mergeCells('C'.$lastRow.':C'.$row);
+      }
 
 
       $row++;
@@ -161,9 +166,37 @@ class Backup_model extends CI_Model
     endforeach;
     $objPHPExcel->getActiveSheet()->setTitle('Backup History');
     //FORMATING
-    foreach($range = array('A','B','C','E','F','G','H') as $columnID) {
+
+    // $objPHPExcel->getActiveSheet()->getStyle("A1:I".$row)   
+    //   ->getBorders()
+    //   ->getLeft()
+    //   ->setBorderStyle(PHPExcel_Style_Border::BORDER_THIN);
+    // $objPHPExcel->getActiveSheet()->getStyle("A1:I".$row)   
+    //   ->getBorders()
+    //   ->getRight()
+    //   ->setBorderStyle(PHPExcel_Style_Border::BORDER_THIN);
+    // $objPHPExcel->getActiveSheet()->getStyle("A1:I".$row)   
+    //   ->getBorders()
+    //   ->getTop()
+    //   ->setBorderStyle(PHPExcel_Style_Border::BORDER_THIN);
+    // $objPHPExcel->getActiveSheet()->getStyle("A1:I".$row)   
+    //   ->getBorders()
+    //   ->getBottom()
+    //   ->setBorderStyle(PHPExcel_Style_Border::BORDER_THIN);
+
+    $border_style= array('borders' => array(
+      'right' => array('style' => PHPExcel_Style_Border::BORDER_THIN,'color' => array('argb' => '766f6e')),
+      'left' => array('style' => PHPExcel_Style_Border::BORDER_THIN,'color' => array('argb' => '766f6e')),
+      'top' => array('style' => PHPExcel_Style_Border::BORDER_THIN,'color' => array('argb' => '766f6e')),
+      'bottom' => array('style' => PHPExcel_Style_Border::BORDER_THIN,'color' => array('argb' => '766f6e')),
+    ));
+
+    foreach($range = array('H','G','F','E','D','C','B','A') as $columnID) {
       $objPHPExcel->getActiveSheet()->getColumnDimension($columnID)
-          ->setAutoSize(true);
+        ->setAutoSize(true);
+        for ($j=0; $j < $row; $j++) { 
+          $objPHPExcel->getActiveSheet()->getStyle($columnID.$j)->applyFromArray($border_style);
+        }
     }
 
 
