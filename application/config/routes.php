@@ -84,6 +84,17 @@ $route['api/backup/update'] = 'backup/update';
 $route['api/backup/readHistoryDetail'] = 'backup/readHistoryDetail';
 $route['api/backup/download/(:any)/(:any)'] = 'backup/download/$1/$2';
 
+#Issue
+$route['issue'] = 'issue';
+$route['api/issue/read'] = 'issue/read';
+$route['api/issue/readDetail'] = 'issue/readDetail';
+$route['api/issue/recover'] = 'issue/recover';
+$route['api/issue/create'] = 'issue/create';
+$route['api/issue/delete'] = 'issue/delete';
+$route['api/issue/update'] = 'issue/update';
+
+
+
 #Others
 $route['template'] = 'general/template';
 $route['404_override'] = 'general/error';

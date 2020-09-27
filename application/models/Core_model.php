@@ -132,6 +132,16 @@ class Core_model extends CI_Model
     return $result;
   }
 
+  public function forceDeleteData($table, $whereVar, $whereVal)
+  {
+    $data['isSuccess'] = false;
+    $where = array($whereVar => $whereVal );
+    $result['isSuccess'] =     $this->db->delete($table, $where);
+    $result['content'] = "Data berhasil dihapus";
+    return $result;
+  }
+
+
 
   public function uploadFile($type,$id)
   {

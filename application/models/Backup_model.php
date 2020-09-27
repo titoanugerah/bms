@@ -15,18 +15,6 @@ class Backup_model extends CI_Model
       return $data;
   }
 
-  // public function create()
-  // {
-  //   if ($this->session->userdata('role')=="admin") {
-  //     // return json_encode($this->core_model->createData('backup',  $this->input->post()));
-  //     $input = $this->input->post();
-  //     $input['adminId'] = $this->session->userdata('id');
-  //     $result = $this->core_model->createData('backup',  $input);
-  //     return json_encode($result);
-  //   }
-    
-  // }
-
   public function read()
   {
 //    $data['backup'] = $this->core_model->readAllData('viewBackupCheck');
@@ -198,6 +186,15 @@ class Backup_model extends CI_Model
           $objPHPExcel->getActiveSheet()->getStyle($columnID.$j)->applyFromArray($border_style);
         }
     }
+
+    $row=$row+2;
+    $objPHPExcel->setActiveSheetIndex(0)
+    ->setCellValue('C'.$row, "Identifikasi dan Verifikator")
+    ->setCellValue('C'.($row+1), "Seksi Operasi Dan MPD")
+    ->setCellValue('C'.$row, $history->date)
+    ->setCellValue('G'.$row, $history->remark)
+    ->setCellValue('H'.$row, $history->user);
+
 
 
     $filename = "BMS_".$job;
