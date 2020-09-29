@@ -18,9 +18,10 @@ class Backup_model extends CI_Model
   public function read()
   {
 //    $data['backup'] = $this->core_model->readAllData('viewBackupCheck');
+    $keyword = $this->input->post('keyword');
     $query = 'select a.id, a.name as job, a.categoryId, c.name as category, a.adminId, d.name as admin, ifnull(count(b.id),0) as totalBackup, ifnull(g.currentBackup,0) as currentBackup, if(g.currentBackup = count(b.id), 1, 0) as hasFinishedBackup, a.isExist from 
               job	as a left join dataset as b on (a.id = b.jobId) inner join category as c on (a.categoryId = c.id) inner join user as d on (a.adminId = d.id) left join (SELECT b.id, count(a.id) as currentBackup FROM backup as a left join job as b
-              on (a.jobId = b.id and if(b.categoryId <=2, date(a.date) = date(now()), week(a.date) = week(now())))group by b.id) as g on (a.id = g.id) group by a.id';
+              on (a.jobId = b.id and if(b.categoryId <=2, date(a.date) = date(now()), week(a.date) = week(now())))group by b.id) as g on (a.id = g.id) where c.name LIKE "%'.$keyword.'%" or a.name LIKE "%'.$keyword.'%" group by a.id';
     $data['backup'] = ($this->db->query($query))->result();
     return json_encode($data);
   }
@@ -83,6 +84,10 @@ class Backup_model extends CI_Model
     
   }
 
+  function checkIsAValidDate($input){
+    return (bool)strtotime($input);
+  }
+
   public function download($id,$date)
   {
     //CREATE NEW EXCEL OBJECT
@@ -115,63 +120,54 @@ class Backup_model extends CI_Model
     // $requests = ($this->db->query($query))->result();
 
     //GET DATA
-    $query = 'select * from viewBackup where date(date) = "'.$date.'" and jobId = '.$id;
+    if($this->checkIsAValidDate($id)){
+      $query = 'select * from viewBackup where date(date) >= "'.$id.'" and date(date) <= "'.$date.'"';
+    } else {
+      $query = 'select * from viewBackup where date(date) = "'.$date.'" and jobId = '.$id;
+    }
     $histories = ($this->db->query($query))->result();
+    try{
     
-    foreach ($histories as $history) : 
-      $lastRow = $row-1;
+      foreach ($histories as $history) : 
+        $lastRow = $row-1;
 
-
-      //SET VALUE
-      $objPHPExcel->setActiveSheetIndex(0)
-      ->setCellValue('A'.$row, $i)
-      ->setCellValue('E'.$row, $history->dataset)
-      ->setCellValue('F'.$row, $history->date)
-      ->setCellValue('G'.$row, $history->remark)
-      ->setCellValue('H'.$row, $history->user);
-
-
-      if($history->job != $currentJob){
+          
+        //SET VALUE
         $objPHPExcel->setActiveSheetIndex(0)
-        ->setCellValue('B'.$row, $history->job);  
-        $currentJob = $history->job;
-      } else {
-        $objPHPExcel->getActiveSheet()->mergeCells('B'.$lastRow.':B'.$row);
-      }
-
-      if($history->cartridge != $currentCartridge){
-        $objPHPExcel->setActiveSheetIndex(0)
-        ->setCellValue('C'.$row, $history->cartridge);  
-        $currentCartridge = $history->cartridge;
-      } else {
-        $objPHPExcel->getActiveSheet()->mergeCells('C'.$lastRow.':C'.$row);
-      }
+        ->setCellValue('A'.$row, $i)
+        ->setCellValue('E'.$row, $history->dataset)
+        ->setCellValue('F'.$row, $history->date)
+        ->setCellValue('G'.$row, $history->remark)
+        ->setCellValue('H'.$row, $history->user);
 
 
-      $row++;
-      $i++;
-      $job=$history->job;
-    endforeach;
+        if($history->job != $currentJob){
+          $objPHPExcel->setActiveSheetIndex(0)
+          ->setCellValue('B'.$row, $history->job);  
+          $currentJob = $history->job;
+        } else {
+          $objPHPExcel->getActiveSheet()->mergeCells('B'.$lastRow.':B'.$row);
+        }
+
+        if($history->cartridge != $currentCartridge){
+          $objPHPExcel->setActiveSheetIndex(0)
+          ->setCellValue('C'.$row, $history->cartridge);  
+          $currentCartridge = $history->cartridge;
+        } else {
+          $objPHPExcel->getActiveSheet()->mergeCells('C'.$lastRow.':C'.$row);
+        }
+
+
+        $row++;
+        $i++;
+        $job=$history->job;
+      endforeach;
+    } catch (exception $error){
+      echo "error";
+    }
+
     $objPHPExcel->getActiveSheet()->setTitle('Backup History');
     //FORMATING
-
-    // $objPHPExcel->getActiveSheet()->getStyle("A1:I".$row)   
-    //   ->getBorders()
-    //   ->getLeft()
-    //   ->setBorderStyle(PHPExcel_Style_Border::BORDER_THIN);
-    // $objPHPExcel->getActiveSheet()->getStyle("A1:I".$row)   
-    //   ->getBorders()
-    //   ->getRight()
-    //   ->setBorderStyle(PHPExcel_Style_Border::BORDER_THIN);
-    // $objPHPExcel->getActiveSheet()->getStyle("A1:I".$row)   
-    //   ->getBorders()
-    //   ->getTop()
-    //   ->setBorderStyle(PHPExcel_Style_Border::BORDER_THIN);
-    // $objPHPExcel->getActiveSheet()->getStyle("A1:I".$row)   
-    //   ->getBorders()
-    //   ->getBottom()
-    //   ->setBorderStyle(PHPExcel_Style_Border::BORDER_THIN);
-
     $border_style= array('borders' => array(
       'right' => array('style' => PHPExcel_Style_Border::BORDER_THIN,'color' => array('argb' => '766f6e')),
       'left' => array('style' => PHPExcel_Style_Border::BORDER_THIN,'color' => array('argb' => '766f6e')),
@@ -191,13 +187,23 @@ class Backup_model extends CI_Model
     $objPHPExcel->setActiveSheetIndex(0)
     ->setCellValue('C'.$row, "Identifikasi dan Verifikator")
     ->setCellValue('C'.($row+1), "Seksi Operasi Dan MPD")
-    ->setCellValue('C'.$row, $history->date)
-    ->setCellValue('G'.$row, $history->remark)
-    ->setCellValue('H'.$row, $history->user);
+    ->setCellValue('C'.($row+4), "Sabar Istiyono");
+
+    $objPHPExcel->getActiveSheet()->mergeCells('E'.$row.':G'.$row);
+    $objPHPExcel->getActiveSheet()->mergeCells('E'.($row+1).':G'.($row+1));
+
+    $objPHPExcel->setActiveSheetIndex(0)
+    ->setCellValue('E'.$row, "Supervisor")
+    ->setCellValue('E'.($row+1), "Seksi Operasi Dan MPD")
+    ->setCellValue('E'.($row+4), $this->session->userdata('supervisor'));
+
+    // ->setCellValue('C'.$row, $history->date)
+    // ->setCellValue('G'.$row, $history->remark)
+    // ->setCellValue('H'.$row, $history->user);
 
 
 
-    $filename = "BMS_".$job;
+    $filename = "BMS_Reporting";
     header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
     header("Content-Disposition: attachment; filename=".$filename.".xls");
     header('Cache-Control: max-age=0');

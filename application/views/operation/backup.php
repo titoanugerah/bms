@@ -6,6 +6,8 @@
       </div>
       <div class="ml-md-auto py-2 py-md-0">
         <a href="#" class="btn btn-white btn-border btn-round mr-2" hidden>Manage</a>
+        <button type="button" class="btn btn-white btn-border btn-round mr-2" onclick="downloadReportForm()">Download Aktivitas Laporan</button>
+
       </div>
     </div>
   </div>
@@ -137,6 +139,40 @@
       </div>
       <div class="modal-footer">
           <a type="button" href="" id="downloadBtn" class="btn btn-primary">Download Excel </a>      
+          <button type="button" data-dismiss="modal" class="btn btn-secondary">Kembali</button>
+        </div>
+        
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="downloadReportModal" backup="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <center>
+          <h4>Download Laporan Aktivitas</h4>
+        </center>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-body row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label>Tanggal Awal</label>
+            <br>
+            <input type="date" id="startDate" class="form-control" >
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <label>Tanggal Akhir</label>
+            <br>
+            <input type="date" id="endDate" class="form-control" >
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+          <a type="button" href="" id="downloadBtn2" class="btn btn-primary">Download Excel </a>      
           <button type="button" data-dismiss="modal" class="btn btn-secondary">Kembali</button>
         </div>
         

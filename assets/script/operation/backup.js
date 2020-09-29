@@ -89,6 +89,23 @@ function detailBackupForm(id) {
   setTimeout(function() { getCartridge(); getDataset(); }, 1000);
 }
 
+function downloadReportForm(){
+  $('#startDate').val('');
+  $('#endDate').val('');  
+  $('#downloadReportModal').modal('show');  
+}
+
+$("#startDate").on('change', function(){
+  if($('#endDate').val()!="") {
+    $("#downloadBtn2").attr('href','api/backup/download/'+$('#startDate').val()+'/'+$('#endDate').val());
+  }
+})
+
+$("#endDate").on('change', function(){
+  if($('#startDate').val()!="") {    
+    $("#downloadBtn2").attr('href','api/backup/download/'+$('#startDate').val()+'/'+$('#endDate').val());
+  }
+})
 
 
 $("#keyword").on('change', function(){
