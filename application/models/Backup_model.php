@@ -47,7 +47,7 @@ class Backup_model extends CI_Model
   public function update()
   {
     $status;
-    if ($this->session->userdata('role')=="supervisor") {
+    if ($this->session->userdata('role')=="supervisor" || $this->session->userdata('role')=="staff") {
       foreach ($this->input->post('listBackupJob') as $item) {
         $where = array(
           'jobId' => $item['jobId'],
