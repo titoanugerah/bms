@@ -141,7 +141,7 @@ $(document).ready(function(){
           $('#editName').val(result.detail.name);
           $('#editEmail').val(result.detail.email);
           $("#editRoleId").val(result.detail.roleId).change();
-          if(result.detail.role == "Staff"){              
+          if(result.detail.role == "staff"){              
             $("#editTeamId").val(result.detail.teamId).change();
             $("#editTeamId").parent().show();
           } else {
