@@ -7,7 +7,15 @@ $(document).ready(function(){
     });
     getUser();
     getRole();
+  });
 
+  $('#editRoleId').on('change', function(){
+    if($('#editRoleId').val()==3){
+      $("#editTeamId").parent().show(); 
+    } else {
+      $('#editTeamId').val(0);
+      $("#editTeamId").parent().hide();
+    }    
   });
 
   function getUser(){

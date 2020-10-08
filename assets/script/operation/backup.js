@@ -132,6 +132,7 @@ function updateBackup(){
     data : {listBackupJob : listBackupJob},
     url: "api/backup/update",
     success: function(result) {
+      console.log(result);
       $("#detailBackupModal").modal('hide');
       getBackup();
       notify('fas fa-check', 'Berhasil', result.content, 'success');
@@ -219,7 +220,7 @@ function addBackupActivity() {
   $('#editRemark').click();
 }
 
-function  getBackup(){
+function getBackup(){
   $.ajax({
     type: "POST",
     dataType : "JSON",

@@ -21,8 +21,8 @@ class Backup_model extends CI_Model
     $keyword = $this->input->post('keyword');
     $query = 'select a.id, a.name as job, a.categoryId, c.name as category, a.adminId, d.name as admin, ifnull(count(b.id),0) as totalBackup, ifnull(g.currentBackup,0) as currentBackup, if(g.currentBackup = count(b.id), 1, 0) as hasFinishedBackup, a.isExist from 
               job	as a left join dataset as b on (a.id = b.jobId) inner join category as c on (a.categoryId = c.id) inner join user as d on (a.adminId = d.id) left join (SELECT b.id, count(a.id) as currentBackup FROM backup as a left join job as b
-              on (a.jobId = b.id and if(b.categoryId <=2, date(a.date) = date(now()), week(a.date) = week(now())))group by b.id) as g on (a.id = g.id) where c.name LIKE "%'.$keyword.'%" or a.name LIKE "%'.$keyword.'%" group by a.id';
-    $data['backup'] = ($this->db->query($query))->result();
+              on (a.jobId = b.id and if(b.categoryId <=2, date(a.date) = date("'.date("Y-m-d").'"), week(a.date) = week("'.date("Y-m-d").'"))) group by b.id) as g on (a.id = g.id) where c.name LIKE "%'.$keyword.'%" or a.name LIKE "%'.$keyword.'%" group by a.id';
+    $data['backup'] = ($this->db->query($query))->result();    
     return json_encode($data);
   }
 
@@ -52,7 +52,7 @@ class Backup_model extends CI_Model
         $where = array(
           'jobId' => $item['jobId'],
           'datasetId' => $item['datasetId'],
-          'date' => date("Y-m-d")          
+          'date(date)' => date("Y-m-d")          
         );
         $data = array(
           'jobId' => $item['jobId'],
@@ -62,7 +62,7 @@ class Backup_model extends CI_Model
           'date' => date("Y-m-d H:i:s"),          
           'remark' => $item['remark']
         );
-        $this->db->delete('backup', $where);
+        $status = $this->db->delete('backup', $where);
         $status = $this->core_model->createData('backup', $data);
       }
     }    
@@ -138,7 +138,7 @@ class Backup_model extends CI_Model
         ->setCellValue('E'.$row, $history->dataset)
         ->setCellValue('F'.$row, $history->date)
         ->setCellValue('G'.$row, $history->remark)
-        ->setCellValue('H'.$row, $history->user);
+        ->setCellValue('H'.$row, "Tim ".$history->supervisor);
 
 
         if($history->job != $currentJob){
