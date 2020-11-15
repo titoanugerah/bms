@@ -87,6 +87,7 @@ $route['api/backup/download/(:any)/(:any)'] = 'backup/download/$1/$2';
 #Issue
 $route['issue'] = 'issue';
 $route['api/issue/read'] = 'issue/read';
+$route['api/issue/readDashboard'] = 'issue/readDashboard';
 $route['api/issue/readDetail'] = 'issue/readDetail';
 $route['api/issue/recover'] = 'issue/recover';
 $route['api/issue/create'] = 'issue/create';

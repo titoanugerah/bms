@@ -27,11 +27,24 @@ class Issue_model extends CI_Model
     $this->core_model->updateData('issue', 'id', $data['issueId'],'lastLogId', $this->db->insert_id());
     return json_encode($result);    
   }
+
   public function read()
   {
     $data['issue'] = $this->core_model->readAllData('viewIssue');
     return json_encode($data);
   }
+
+  public function readDashboard()
+  {
+    $data['issue'] = $this->core_model->readAllData('viewIssue');
+    $data['total'] = $this->core_model->countAllData('viewIssue');
+    $data['fixed'] = ($this->db->query('SELECT a.* FROM bmsdb.issue as a, issueLog as b where a.lastLogId = b.id and b.status >= 4'))->num_rows();
+    $data['unfixed'] = ($this->db->query('SELECT a.* FROM bmsdb.issue as a, issueLog as b where a.lastLogId = b.id and b.status < 4'))->num_rows();
+    //    $data['issued'] = $this->core_model->countSim('viewIssue');
+    
+    return json_encode($data);
+  }
+
 
   public function readDetail()
   {

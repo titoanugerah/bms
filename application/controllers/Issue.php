@@ -22,6 +22,13 @@ class Issue extends CI_Controller
     echo $this->issue_model->read();
   }
 
+  #API
+  public function readDashboard()
+  {
+    echo $this->issue_model->readDashboard();
+  }
+
+
   public function readDetail()
   {
     echo $this->issue_model->readDetail();

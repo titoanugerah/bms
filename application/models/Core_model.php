@@ -49,6 +49,18 @@ class Core_model extends CI_Model
     return $data->result();
   }
 
+  public function countAllData($table)
+  {
+    $list = $this->db->list_fields($table);
+    foreach ($list as $item)
+    {
+      $this->db->or_like($item, $this->input->post('keyword'));
+    }
+    $data = $this->db->get($table);
+    return $data->num_rows();
+  }
+
+
   public function recoverData($table, $whereVar, $whereVal)
   {
     $result['isSuccess'] = false;
