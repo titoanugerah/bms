@@ -9,6 +9,7 @@ class General_model extends CI_Model
   {
     parent::__construct();
     $this->load->model('core_model');
+    error_reporting(0);
   }
 
   public function contentWelcome()

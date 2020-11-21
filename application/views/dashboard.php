@@ -110,7 +110,7 @@
 
 
 
-      <div class="col-md-12">
+      <div class="col-md-12" <?php if($this->session->userdata['roleId']!=2){echo 'hidden';}?>>
       <div class="row">
 
         <div class="card full-height  col-md-12">
