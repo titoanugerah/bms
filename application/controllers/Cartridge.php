@@ -47,6 +47,10 @@ class Cartridge extends CI_Controller
     echo $this->cartridge_model->delete();
   }
 
+  public function download()
+  {
+    echo $this->cartridge_model->download();    
+  }
 }
 
  ?>

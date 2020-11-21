@@ -5,7 +5,7 @@
         <h2 class="text-white pb-2 fw-bold" >Job / Aplikasi </h2>
       </div>
       <div class="ml-md-auto py-2 py-md-0">
-        <a href="#" class="btn btn-white btn-border btn-round mr-2" hidden>Manage</a>
+        <a href="<?php echo base_url('api/job/download'); ?>" class="btn btn-white btn-border btn-round mr-2" >Download Rekap </a>
         <button type="button" class="btn btn-white btn-border btn-round mr-2" onclick="addNewJobForm()">Tambah Job / Aplikasi Baru</button>
       </div>
     </div>

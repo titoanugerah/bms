@@ -47,6 +47,11 @@ class Job extends CI_Controller
     echo $this->job_model->delete();
   }
 
+  public function download()
+  {
+    echo $this->job_model->download();    
+  }
+
 }
 
  ?>

@@ -47,6 +47,13 @@ class Dataset extends CI_Controller
     echo $this->dataset_model->delete();
   }
 
+  public function download()
+  {
+    echo $this->dataset_model->download();    
+  }
+
+
+  
 }
 
  ?>

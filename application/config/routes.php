@@ -54,6 +54,8 @@ $route['api/cartridge/recover'] = 'cartridge/recover';
 $route['api/cartridge/create'] = 'cartridge/create';
 $route['api/cartridge/delete'] = 'cartridge/delete';
 $route['api/cartridge/update'] = 'cartridge/update';
+$route['api/cartridge/download'] = 'cartridge/download';
+
 
 #Job
 $route['job'] = 'job';
@@ -63,6 +65,7 @@ $route['api/job/recover'] = 'job/recover';
 $route['api/job/create'] = 'job/create';
 $route['api/job/delete'] = 'job/delete';
 $route['api/job/update'] = 'job/update';
+$route['api/job/download'] = 'job/download';
 
 #Dataset
 $route['dataset'] = 'dataset';
@@ -72,6 +75,8 @@ $route['api/dataset/recover'] = 'dataset/recover';
 $route['api/dataset/create'] = 'dataset/create';
 $route['api/dataset/delete'] = 'dataset/delete';
 $route['api/dataset/update'] = 'dataset/update';
+$route['api/dataset/download'] = 'dataset/download';
+
 
 #Backup
 $route['backup'] = 'backup';
@@ -93,8 +98,6 @@ $route['api/issue/recover'] = 'issue/recover';
 $route['api/issue/create'] = 'issue/create';
 $route['api/issue/delete'] = 'issue/delete';
 $route['api/issue/update'] = 'issue/update';
-
-
 
 #Others
 $route['template'] = 'general/template';
