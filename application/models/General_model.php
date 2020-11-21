@@ -27,6 +27,11 @@ class General_model extends CI_Model
   public function contentDashboard()
   {
     $data['viewName'] = 'dashboard';
+    if($this->session->userdata('isLogin')){
+      if($this->session->userdata('roleId')==2){
+        $data['performance'] = ($this->db->query('SELECT * FROM viewBackup where spvId = '.$this->session->userdata['id']))->result();
+      }
+    }
     $this->account();
     return $data;
   }

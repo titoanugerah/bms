@@ -40,7 +40,6 @@ $(document).ready(function(){
           '<td>'+data.user+'</td>' +
           '<td>'+data.name+'</td>' +
           '<td>'+getStatusMessage(data.status)+'</td>' +
-          '<td><div class="row">'+'<button class="btn btn-primary btn-sm" onclick="detailIssueForm('+data.id+')"><i class="fas fa-eye"></i></button>&nbsp;<button class="btn btn-danger btn-sm" onclick="deleteIssue('+data.id+')"><i class="fas fa-trash"></i></button></div></td>' +
           '</tr>' + html1;
           no++;
         });

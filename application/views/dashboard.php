@@ -38,7 +38,6 @@
                     <th>Pelapor</th>
                     <th>Judul Masalah</th>
                     <th>Status</th>
-                    <th>Opsi</th>
                   </tr>
                 </thead>
                 <tbody id="issueData">
@@ -49,7 +48,6 @@
       </div>
     </div>
     <div class="col-md-4">
-    
         <div class="card card-stats card-primary card-round">
             <div class="card-body">
                 <div class="row">
@@ -107,7 +105,40 @@
             </div>
 
         </div>
+      </div>
+
+
+
+
+      <div class="col-md-12">
+      <div class="row">
+
+        <div class="card full-height  col-md-12">
+          <div class="card-header">
+            <div class="card-title">Rekap Aktifitas Staf</div>
+              <table  class="display datatable">
+                <thead>
+                  <tr>
+                    <th>No</th>
+                    <th>Tanggal</th>
+                    <th>Aplikasi</th>
+                    <th>Nama</th>
+                  </tr>
+                </thead>
+                <tbody id="test">
+                <?php foreach($performance as $item) : ?>
+                <tr>
+                    <td><?php echo $item->id;?></td>
+                    <td><?php echo $item->date;?></td>
+                    <td><?php echo $item->job;?></td>
+                    <td><?php echo $item->user;?></td>
+                  </tr>
+                <?php endforeach; ?>
+
+                </tbody>
+              </table>          
+          </div>
         </div>
-
-
+      </div>
+    </div>
 </div>
