@@ -52,6 +52,17 @@ class Backup extends CI_Controller
     echo $this->backup_model->delete();
   }
 
+  public function deleteHistoryDetail()
+  {
+    echo $this->backup_model->deleteHistoryDetail();
+  }
+
+  public function deleteAllHistoryDetail()
+  {
+    echo $this->backup_model->deleteAllHistoryDetail();
+  }
+
+
   public function download($id, $date)
   {
     $this->backup_model->download($id,$date);  

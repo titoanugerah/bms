@@ -131,6 +131,7 @@
               <th>Cartridge</th>
               <th>Volume</th>
               <th>PIC</th>
+              <th>Opsi</th>
             </tr>
           </thead>
           <tbody id="historyData">

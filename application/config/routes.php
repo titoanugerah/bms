@@ -87,6 +87,8 @@ $route['api/backup/create'] = 'backup/create';
 $route['api/backup/delete'] = 'backup/delete';
 $route['api/backup/update'] = 'backup/update';
 $route['api/backup/readHistoryDetail'] = 'backup/readHistoryDetail';
+$route['api/backup/deleteHistoryDetail'] = 'backup/deleteHistoryDetail';
+$route['api/backup/deleteAllHistoryDetail'] = 'backup/deleteAllHistoryDetail';
 $route['api/backup/download/(:any)/(:any)'] = 'backup/download/$1/$2';
 
 #Issue

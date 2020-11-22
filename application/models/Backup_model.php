@@ -84,6 +84,28 @@ class Backup_model extends CI_Model
     
   }
 
+  public function deleteHistoryDetail()
+  {
+   if ($this->session->userdata('role')=="supervisor") {
+      return json_encode($this->core_model->forceDeleteData('backup', 'id', $this->input->post('id')));
+   } else {
+      return http_response_code(401);
+   }
+  }
+
+  public function deleteAllHistoryDetail()
+  {
+   if ($this->session->userdata('role')=="supervisor") {
+     $convertedDate =  date_parse_from_format('Ymd', $this->input->post('date'));
+     $id = $this->input->post('jobId');
+     $date = $convertedDate['year'].'-'.$convertedDate['month'].'-'.$convertedDate['day'];
+     return json_encode($this->db->query('delete from backup where jobId ='.$id.' and date = "'.$date.'"'));
+   } else {
+      return http_response_code(401);
+   }
+  }
+
+
   function checkIsAValidDate($input){
     return (bool)strtotime($input);
   }

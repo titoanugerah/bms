@@ -126,6 +126,7 @@
                     <th>Dataset</th>
                     <th>Catridge</th>
                     <th>Volume</th>
+                    <th>Opsi</th>
                   </tr>
                 </thead>
                 <tbody id="test">

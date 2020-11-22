@@ -17,6 +17,46 @@ setTimeout(function(){
 });
 }, 600)
 
+function deleteHistoryDetail(id, jobId, date){
+  $.ajax({
+    type: "POST",
+    dataType : "JSON",
+    data : {
+        id : id,
+    },
+    url: "api/backup/deleteHistoryDetail",
+    success: function(result) {
+      $('#historyData').html("");
+      notify('fas fa-check', 'Berhasil', result.content, 'success');
+      getHistoryDetail(jobId,date);
+    },
+    error: function(result) {
+      console.log(result);
+        notify('fas fa-times', 'Gagal', getErrorMsg(result.responseText), 'danger');
+    }
+  });
+}
+
+function deleteAllHistoryDetail(jobId, date){
+  $.ajax({
+    type: "POST",
+    dataType : "JSON",
+    data : {
+        jobId : jobId,
+        date : date
+    },
+    url: "api/backup/deleteAllHistoryDetail",
+    success: function(result) {
+      notify('fas fa-check', 'Berhasil', result.content, 'success');
+      detailBackupForm(jobId);
+    },
+    error: function(result) {
+      console.log(result);
+        notify('fas fa-times', 'Gagal', getErrorMsg(result.responseText), 'danger');
+    }
+  });
+}
+
 function getHistoryDetail(id,date){
   $.ajax({
     type: "POST",
@@ -39,6 +79,7 @@ function getHistoryDetail(id,date){
         '<td>'+data.cartridge+'</td>' +
         '<td>'+data.remark+'</td>' +
         '<td>'+data.user+'</td>' +
+        '<td> <button type="button" class="btn btn-danger" onclick="deleteHistoryDetail('+data.id+','+data.jobId+','+data.date.replace('-','').replace('-','')+')"><i class="fas fa-times"></i></button> </td>' +
         '</tr>' + html1;  
         dates = data.date;
       });
@@ -75,7 +116,7 @@ function detailBackupForm(id) {
         '<td>'+data.date+'</td>' +
         '<td>'+data.cartridge+'</td>' +
         '<td>'+data.currentBackup+'/'+data.totalBackup+'</td>' +
-        '<td><div class="row">'+'<button class="btn btn-primary btn-sm" onclick="getHistoryDetail('+data.id+','+data.date.replace('-','').replace('-','')+')"><i class="fas fa-eye"></i></button></div></td>' +
+        '<td><div class="row">'+'<button class="btn btn-primary btn-sm" onclick="getHistoryDetail('+data.id+','+data.date.replace('-','').replace('-','')+')"><i class="fas fa-eye"></i></button>'+'&nbsp;<button class="btn btn-danger btn-sm" onclick="deleteAllHistoryDetail('+data.id+','+data.date.replace('-','').replace('-','')+')"><i class="fas fa-times"></i></button></div></td>' +
         '</tr>' + html1;
   
       });
