@@ -121,8 +121,11 @@
                   <tr>
                     <th>No</th>
                     <th>Tanggal</th>
-                    <th>Aplikasi</th>
                     <th>Nama</th>
+                    <th>Aplikasi</th>
+                    <th>Dataset</th>
+                    <th>Catridge</th>
+                    <th>Volume</th>
                   </tr>
                 </thead>
                 <tbody id="test">
@@ -130,8 +133,11 @@
                 <tr>
                     <td><?php echo $item->id;?></td>
                     <td><?php echo $item->date;?></td>
-                    <td><?php echo $item->job;?></td>
                     <td><?php echo $item->user;?></td>
+                    <td><?php echo $item->job;?></td>
+                    <td><?php echo $item->dataset;?></td>
+                    <td><?php echo $item->catridge;?></td>
+                    <td><?php echo $item->remark;?></td>
                   </tr>
                 <?php endforeach; ?>
 
