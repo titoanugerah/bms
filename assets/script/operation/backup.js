@@ -116,7 +116,7 @@ function detailBackupForm(id) {
         '<td>'+data.date+'</td>' +
         '<td>'+data.cartridge+'</td>' +
         '<td>'+data.currentBackup+'/'+data.totalBackup+'</td>' +
-        '<td><div class="row">'+'<button class="btn btn-primary btn-sm" onclick="getHistoryDetail('+data.id+','+data.date.replace('-','').replace('-','')+')"><i class="fas fa-eye"></i></button>'+'&nbsp;<button class="btn btn-danger btn-sm" onclick="deleteAllHistoryDetail('+data.id+','+data.date.replace('-','').replace('-','')+')"><i class="fas fa-times"></i></button></div></td>' +
+        '<td><div class="row">'+'<button class="btn btn-primary btn-sm" onclick="getHistoryDetail('+data.id+','+data.date.replace('-','').replace('-','')+')"><i class="fas fa-eye"></i></button>'+'</div></td>' +
         '</tr>' + html1;
   
       });
