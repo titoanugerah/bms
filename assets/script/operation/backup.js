@@ -32,7 +32,8 @@ function deleteHistoryDetail(id, jobId, date){
     },
     error: function(result) {
       console.log(result);
-        notify('fas fa-times', 'Gagal', getErrorMsg(result.responseText), 'danger');
+      unauthorized();
+//        notify('fas fa-times', 'Gagal', getErrorMsg(result.responseText), 'danger');
     }
   });
 }
