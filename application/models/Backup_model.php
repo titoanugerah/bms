@@ -21,7 +21,7 @@ class Backup_model extends CI_Model
     $keyword = $this->input->post('keyword');
     $query = 'select a.id, a.name as job, a.categoryId, c.name as category, a.adminId, d.name as admin, ifnull(count(b.id),0) as totalBackup, ifnull(g.currentBackup,0) as currentBackup, if(g.currentBackup = count(b.id), 1, 0) as hasFinishedBackup, a.isExist from 
               job	as a left join dataset as b on (a.id = b.jobId) inner join category as c on (a.categoryId = c.id) inner join user as d on (a.adminId = d.id) left join (SELECT b.id, count(a.id) as currentBackup FROM backup as a left join job as b
-              on (a.jobId = b.id and if(b.categoryId <=2, date(a.date) = date("'.date("Y-m-d").'"), week(a.date) = week("'.date("Y-m-d").'"))) group by b.id) as g on (a.id = g.id) where c.name LIKE "%'.$keyword.'%" or a.name LIKE "%'.$keyword.'%" group by a.id';
+              on (a.jobId = b.id and if(b.categoryId <=2, date(a.date) = date("'.date("Y-m-d").'"), week(a.date) = week("'.date("Y-m-d").'"))) group by b.id) as g on (a.id = g.id) where b.isExist = 1 and c.name LIKE "%'.$keyword.'%" or a.name LIKE "%'.$keyword.'%" group by a.id';
     $data['backup'] = ($this->db->query($query))->result();    
     return json_encode($data);
   }
